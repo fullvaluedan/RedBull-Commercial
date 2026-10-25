@@ -64,7 +64,7 @@ while timeline.GetTrackCount("video") < 2:
     timeline.AddTrack("video")
 
 # Ensure required audio tracks exist
-while timeline.GetTrackCount("audio") < 5:
+while timeline.GetTrackCount("audio") < 6:
     timeline.AddTrack("audio")
 ```
 
@@ -96,13 +96,13 @@ Users want stylized text overlays that remain **fully editable in DaVinci Resolv
 
 ---
 
-## 5. Non-Noise Multitrack Audio Engineering
+## 5. Non-Noise 6-Stem Multitrack Audio Engineering & Leveling
 
-To comply with professional standards and avoid psychoacoustic "static hiss" (`np.random.randn`), the audio timeline is split into 5 dedicated functional stems:
+To comply with professional standards and avoid psychoacoustic "static hiss" (`np.random.randn`), the audio timeline is split into 6 dedicated functional stems:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       5-STEM AUDIO ARCHITECTURE                             │
+│                       6-STEM AUDIO ARCHITECTURE                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Track A1: AMBIENCE & ENGINE BED                                             │
 │   • Authentic recorded desert wind and vintage 1950s engine idle.           │
@@ -114,19 +114,34 @@ To comply with professional standards and avoid psychoacoustic "static hiss" (`n
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Track A3: SUB-BASS PYROTECHNIC BOOM                                         │
 │   • 50Hz pure acoustic sine blast with exponential decay at 14.2s.          │
+│   • Leveled & ducked by -9 dB at 14.4s so it never drowns out dialogue.     │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ Track A4: VOICEOVER PUNCHLINE                                               │
+│ Track A4: VOICEOVER PUNCHLINE (LOUD & CRISP)                                │
 │   • "Red Bull, it gives you wings if you want to go to heaven today."       │
-│   • Starts cleanly at 14.2s and plays across the smoke cloud payoff.        │
+│   • Boosted +7.5 dB, 3kHz presence EQ (+4 dB), HPF 90Hz, true peak -1.0 dB. │
+│   • Cuts right through the explosion and music bed.                         │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Track A5: HEAVENLY ANGELIC HARP & SHIMMERING BELLS                          │
 │   • Harmonic major 9th harp glissando (C4 to G6) + bell chime at 14.2s.     │
 │   • Zero Gaussian noise. Pure musical harmonic comedy sting.                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Track A6: MENTOS COMMERCIAL MUSIC BED                                       │
+│   • Iconic Mentos commercial song playing from 0.0s to 20.0s.                │
+│   • Normal level: 0.85 (-14 dB LUFS); ducked to 0.40 (-20 dB) during the    │
+│     voiceover punchline (14.4s to 19.8s).                                   │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
+### The Acoustic Masking Problem & The Ducking Solution:
+1. **The Masking Defect**: The sub-bass explosion boom peaked at `-0.4 dB`, while the dry voiceover sat at `-20.5 dB`. Playing them simultaneously caused the voiceover to be completely drowned out.
+2. **The Forensic Fix**:
+   * **Voiceover Processing**: Applied a high-pass filter at 90Hz (eliminating low-end mud), a +4 dB parametric boost at 3,000Hz (enhancing consonant intelligibility), a +7.5 dB overall gain boost, and a peak limiter at -1.0 dB.
+   * **Explosion Ducking**: The explosion boom retains its violent 0.2s initial transient attack (`volume=1.0`), then immediately ducks down by -9 dB (`volume=0.35`) at 14.4s when speech begins.
+   * **Music Bed Ducking**: The Mentos song plays energetically at `volume=0.85` throughout cuts 1-6, smoothly ducks to `volume=0.40` during the punchline, and gently fades out with the logo resolve at 19.8s.
+
 ---
 
-## 6. Full Automation Script Reference
+## 6. Automation Scripts Reference
 
-See [`scripts/assemble_v10_complete.py`](../scripts/assemble_v10_complete.py) for the complete, production-verified implementation.
+* [`scripts/update_v10_mentos_and_levels.py`](../scripts/update_v10_mentos_and_levels.py): Complete 6-track audio balancing, Mentos music ducking, and DaVinci Resolve Studio automation.
+* [`scripts/assemble_v10_complete.py`](../scripts/assemble_v10_complete.py): Complete timeline build script.

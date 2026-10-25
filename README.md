@@ -71,6 +71,7 @@ RedBull-Commercial/
 │   └── 06_DAVINCI_RESOLVE_STUDIO_AUTOMATION.md
 └── scripts/
     ├── assemble_v10_complete.py         # Full Resolve Studio 21.1 timeline assembler
+    ├── update_v10_mentos_and_levels.py  # 6-track audio balancing, Mentos music ducking & Resolve sync
     ├── circuit_breaker.py               # Single-piece runner with 2-strike halt
     ├── extract_audit_sheets.py          # 1-second interval frame extractor & stitcher
     └── generate_heavenly_harp_sfx.py    # Non-noise harmonic acoustic harp synthesizer
