@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+env/
+
+# Media binaries (large files)
+*.mp4
+*.mov
+*.wav
+*.mp3
+render/
+cuts_*/
+raw_*/
+omniflash_pass/
+veo_quality_pass/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
