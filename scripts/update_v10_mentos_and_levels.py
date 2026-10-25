@@ -256,17 +256,20 @@ def render_leveled_master(audio_tracks):
             f.write(f"file '{(CUTS_DIR / c).as_posix()}'\n")
 
     a1, a2, a3, a4, a5, a6 = audio_tracks
+    overlay_png = PROJ_DIR / "punchline_graphics_v07.png"
 
     run_ffmpeg([
         "-f", "concat", "-safe", "0", "-i", str(concat_file),
         "-i", str(a1), "-i", str(a2), "-i", str(a3),
         "-i", str(a4), "-i", str(a5), "-i", str(a6),
+        "-i", str(overlay_png),
         "-filter_complex",
         (
+            "[0:v][7:v]overlay=0:0:enable='gte(t,14.2)'[vout];"
             "[1:a][2:a][3:a][4:a][5:a][6:a]amix=inputs=6:duration=first:dropout_transition=0:normalize=0[mix];"
             "[mix]alimiter=limit=-0.5dB[aout]"
         ),
-        "-map", "0:v", "-map", "[aout]",
+        "-map", "[vout]", "-map", "[aout]",
         "-c:v", "libx264", "-crf", "16", "-preset", "slow", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "320k", "-ar", "48000",
         str(master_dst)

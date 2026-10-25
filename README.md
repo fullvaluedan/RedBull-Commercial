@@ -29,6 +29,7 @@ This repository catalogs every struggle, technical constraint, credit trap, and 
 | [**04. Kuleshov Directing & Prompting**](docs/04_KULESHOV_DIRECTING_AND_PROMPTING_GUIDE.md) | The Shot-Reverse-Shot framework, separate Setup vs. Reveal clips, negative token anchoring to defeat suburban training bias, and Hollywood stunt phrasing to bypass 600s moderation hangs. |
 | [**05. Verification & Circuit Breakers**](docs/05_VERIFICATION_AND_CIRCUIT_BREAKER_PROTOCOL.md) | Single-piece generation (`batch_size = 1`), the 2-Strike Circuit Breaker, and the 3-Subagent Adversarial Council (`continuity-qc`, `physics-acting-qc`, `technical-resolve-qc`). |
 | [**06. DaVinci Resolve Studio Automation**](docs/06_DAVINCI_RESOLVE_STUDIO_AUTOMATION.md) | Scripting Resolve 21.1 via Python, handling timeline start timecode (`01:00:00:00` / frame 108,000), multi-track assignment, native editable `Text+` title integration, and non-noise audio mixing. |
+| [**07. Viral Short-Form Video Scripts**](docs/07_SHORT_FORM_VIRAL_SCRIPTS.md) | 8 high-retention 45–60s video scripts for TikTok, Reels, and Shorts breaking down credit economics, the Kuleshov trick, Issue #799, negative tokens, stunt phrasing, audio static fixes, and Resolve tips. |
 
 ---
 
@@ -68,7 +69,8 @@ RedBull-Commercial/
 │   ├── 03_PLATFORM_CONSTRAINTS_AGENT_ONLY_COMPOSER.md
 │   ├── 04_KULESHOV_DIRECTING_AND_PROMPTING_GUIDE.md
 │   ├── 05_VERIFICATION_AND_CIRCUIT_BREAKER_PROTOCOL.md
-│   └── 06_DAVINCI_RESOLVE_STUDIO_AUTOMATION.md
+│   ├── 06_DAVINCI_RESOLVE_STUDIO_AUTOMATION.md
+│   └── 07_SHORT_FORM_VIRAL_SCRIPTS.md
 └── scripts/
     ├── assemble_v10_complete.py         # Full Resolve Studio 21.1 timeline assembler
     ├── update_v10_mentos_and_levels.py  # 6-track audio balancing, Mentos music ducking & Resolve sync
